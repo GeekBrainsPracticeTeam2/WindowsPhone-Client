@@ -9,6 +9,18 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Hub Header="Статистика">
+            <HubSection Header="Ежедневная">
+                <DataTemplate>
+                    <Grid/>
+                </DataTemplate>
+            </HubSection>
+            <HubSection Header="Общая">
+                <DataTemplate>
+                    <Grid/>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
 
     </Grid>
 </Page>
