@@ -1,4 +1,4 @@
 # WindowsPhone-Client
 Windows phone client app
 
-for view statistics
+для отображения статистики из БД собранной краулером
