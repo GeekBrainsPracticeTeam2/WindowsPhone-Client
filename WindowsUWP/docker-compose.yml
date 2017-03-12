@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  windowsuwp:
+    image: windowsuwp
+    build:
+      context: .\WindowsUWP
+      dockerfile: Dockerfile

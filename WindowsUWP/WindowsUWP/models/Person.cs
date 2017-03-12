@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsUWP.models
 {
-    class Persons
+    class Person
     {
         public int ID { get; set; }
         public string Name { get; set; }

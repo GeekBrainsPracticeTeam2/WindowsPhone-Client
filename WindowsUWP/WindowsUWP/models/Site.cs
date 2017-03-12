@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace WindowsUWP.models
 {
-    class Last_update
+    class Site
     {
         public int ID { get; set; }
-        public DateTime Date { get; set; }
-        public string table_name { get; set; }
+        public string Url { get; set; }
     }
 }
