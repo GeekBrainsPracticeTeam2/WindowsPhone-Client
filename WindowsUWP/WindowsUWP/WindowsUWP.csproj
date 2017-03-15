@@ -96,7 +96,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RankContext.cs" />
+    <Compile Include="Json\JsonHelper.cs" />
+    <Compile Include="Migrations\20170312085000_DbMigration.cs" />
+    <Compile Include="Migrations\20170312085000_DbMigration.designer.cs">
+      <DependentUpon>20170312085000_DbMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\RankContextModelSnapshot.cs" />
+    <Compile Include="DBDictionary.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

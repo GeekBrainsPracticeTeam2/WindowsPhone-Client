@@ -8,10 +8,18 @@ using WindowsUWP.models;
 
 namespace WindowsUWP
 {
-    class RankContext: DbContext
+    // TODO Дописать работу с БД
+    class DBDictionary: DbContext
     {
         public DbSet<LastUpdate> LastUpdates { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Site> Sites { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Filename=Rank.db");
+        }
     }
+
+    
 }
