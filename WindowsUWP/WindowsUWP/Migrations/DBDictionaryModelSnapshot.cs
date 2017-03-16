@@ -8,7 +8,7 @@ using WindowsUWP;
 namespace WindowsUWP.Migrations
 {
     [DbContext(typeof(DBDictionary))]
-    partial class RankContextModelSnapshot : ModelSnapshot
+    partial class DBDictionaryModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

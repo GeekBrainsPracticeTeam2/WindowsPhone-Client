@@ -8,10 +8,60 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="19*"/>
-            <RowDefinition Height="141*"/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock" Margin="10,0,10,10" TextWrapping="Wrap" Grid.Row="0" Text="Статистика" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" FontSize="48"/>
+        <Hub Header="Статистика">
+            <HubSection x:Name="everyDaySection" Header="Ежедневная">
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            
+                            <StackPanel Orientation="Horizontal" Padding="3">
+                                <TextBlock Text="C:" VerticalAlignment="Center"/>
+                                <DatePicker HorizontalAlignment="Right" Padding="5" VerticalAlignment="Top"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Padding="3">
+                                <TextBlock Text="По:" VerticalAlignment="Center"/>
+                                <DatePicker HorizontalAlignment="Right" Padding="5" VerticalAlignment="Top"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Padding="3">
+                                <TextBlock Text="Сайты: " Padding="5" VerticalAlignment="Center"/>
+                                <ComboBox HorizontalAlignment="Left" Padding="5" VerticalAlignment="Top" Width="255"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Padding="3">
+                                <TextBlock Text="Личность: " Padding="5" VerticalAlignment="Center"/>
+                                <ComboBox HorizontalAlignment="Left" Padding="5" VerticalAlignment="Top" Width="230" />
+                            </StackPanel>
+                            
+                        </StackPanel>
+                        
+                        <GridView Grid.Row="1" Margin="2">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="Проверка"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+            <HubSection Header="Общая">
+                <DataTemplate>
+                    <Grid/>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
+        
+
+
+
     </Grid>
 </Page>
