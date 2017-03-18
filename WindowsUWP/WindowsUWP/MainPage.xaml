@@ -40,7 +40,7 @@
                             
                         </StackPanel>
                         
-                        <GridView Grid.Row="1" Margin="2">
+                        <GridView x:Name="everyDayGrid" Grid.Row="1" Margin="2">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -53,15 +53,33 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection Header="Общая">
+            <HubSection x:Name="generalSection" Header="Общая">
                 <DataTemplate>
-                    <Grid/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Padding="3">
+                            <TextBlock Text="Сайты: " Padding="5" VerticalAlignment="Center"/>
+                            <ComboBox HorizontalAlignment="Left" Padding="5" VerticalAlignment="Top" Width="255"/>
+                        </StackPanel>
+
+                        <GridView x:Name="generalStaticGrid" Grid.Row="1" Margin="2">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="Проверка"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+
+                    </Grid>
                 </DataTemplate>
             </HubSection>
         </Hub>
         
-
-
-
     </Grid>
 </Page>
