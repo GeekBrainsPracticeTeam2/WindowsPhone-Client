@@ -7,9 +7,9 @@ using Windows.UI.Popups;
 
 namespace WindowsUWP.models
 {
-    class TotalStatis
+    public class TotalStatis
     {
-        public string PersonName { private get; set; }
+        public string PersonName { get; set; }
         public int Rank { get; set; }
 
         protected int personId;

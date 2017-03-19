@@ -25,6 +25,7 @@ namespace WindowsUWP
     {
 
         public List<PersonStats> EveryDayStats { get; set; }
+        public List<TotalStatis> GeneralStatistis { get; set; }
         public List<Site> Sites { get; set; }
         public List<Person> Persons { get; set; }
 
@@ -40,11 +41,22 @@ namespace WindowsUWP
                 new models.PersonStats(DateTime.Now, 200),
             };
 
+            GeneralStatistis = new List<TotalStatis>
+            {
+                new TotalStatis(1,2000),
+                new TotalStatis(2, 4500),
+            };
+
             using(DBDictionary db = new DBDictionary())
             {
                 //Site site1 = new Site(1, "lenta.ru");
                 //Site site2 = new Site(2, "rio.ru");
 
+                //Person person1 = new Person(1, "Вова");
+                //Person person2 = new Person(2, "Петя");
+
+                //db.Persons.Add(person1);
+                //db.Persons.Add(person2);
                 //db.Sites.Add(site1);
                 //db.Sites.Add(site2);
                 //db.SaveChanges();
@@ -67,7 +79,7 @@ namespace WindowsUWP
             TotalStatis site = new TotalStatis(0,0);
         }
 
-        private void GridView_Loaded(object sender, RoutedEventArgs e)
+        private void EverydayGridView_Loaded(object sender, RoutedEventArgs e)
         {
             var gridView = (GridView)sender;
             gridView.ItemsSource = EveryDayStats;
@@ -83,6 +95,12 @@ namespace WindowsUWP
         {
             var comboBox = (ComboBox)sender;
             comboBox.ItemsSource = Persons;
+        }
+
+        private void GeneralStaticGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var gridView = (GridView)sender;
+            gridView.ItemsSource = GeneralStatistis;
         }
     }
 }

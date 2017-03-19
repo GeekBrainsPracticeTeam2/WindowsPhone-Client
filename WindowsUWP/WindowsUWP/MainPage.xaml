@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Hub Header="Статистика">
-            <HubSection x:Name="everyDaySection" Header="Ежедневная">
+            <HubSection x:Name="everyDaySection" Header="Ежедневная" Width="350">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -53,15 +53,19 @@
 
                         </StackPanel>
 
-                        <GridView Grid.Row="1" x:Name="GridView" Loaded="GridView_Loaded">
-                            <GridView.ItemTemplate>
-                                <DataTemplate x:DataType="model:PersonStats">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Bind Date}" Padding="5"/>
-                                        <TextBlock Text="{x:Bind Rank}" Padding="5"/>
-                                    </StackPanel>
+                        <GridView Grid.Row="1" x:Name="GridView" Loaded="EverydayGridView_Loaded" Width="330">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:PersonStats">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="250" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{x:Bind Date}" Padding="5"/>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Rank}" Padding="5"/>
+                                    </Grid>
                                 </DataTemplate>
-                            </GridView.ItemTemplate>
+                                </GridView.ItemTemplate>
                         </GridView>
                     </Grid>
                 </DataTemplate>
@@ -69,7 +73,7 @@
             
             <!-- Общая статистика -->
             
-            <HubSection x:Name="generalSection" Header="Общая">
+            <HubSection x:Name="generalSection" Header="Общая" Width="350">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -88,11 +92,16 @@
                             </ComboBox>
                         </StackPanel>
 
-                        <GridView x:Name="generalStaticGrid" Grid.Row="1" Margin="2">
+                        <GridView x:Name="generalStaticGrid" Grid.Row="1" Margin="2" Loaded="GeneralStaticGrid_Loaded">
                             <GridView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="model:TotalStatis">
                                     <Grid>
-                                        <TextBlock Text="Проверка"/>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="250" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{x:Bind PersonName}" Padding="5"/>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Rank}" Padding="5"/>
                                     </Grid>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
