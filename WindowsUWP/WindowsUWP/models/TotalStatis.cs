@@ -24,10 +24,17 @@ namespace WindowsUWP.models
 
         private void TakePersonName()
         {
-            using(var db = new DBDictionary())
+            try
             {
-                var person = db.Persons.Find(personId);
-                PersonName = person.Name;
+                using (var db = new DBDictionary())
+                {
+                    var person = db.Persons.Find(personId);
+                    PersonName = person.Name;
+                }
+            }
+            catch(NullReferenceException e)
+            {
+                PersonName = "Имя неизвестно";
             }
         }
 

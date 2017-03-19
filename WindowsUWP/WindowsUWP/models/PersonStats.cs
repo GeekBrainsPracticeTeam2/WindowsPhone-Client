@@ -11,6 +11,11 @@ namespace WindowsUWP.models
         public DateTime Date { get; set; }
         public int Rank { get; set; }
 
+        public PersonStats()
+        {
+
+        }
+
         public PersonStats(DateTime date, int rankCount)
         {
             Date = date;
