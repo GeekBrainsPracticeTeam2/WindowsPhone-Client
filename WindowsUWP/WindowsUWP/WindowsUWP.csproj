@@ -106,6 +106,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="models\PersonStats.cs" />
+    <Compile Include="models\TotalStatis.cs" />
     <Compile Include="models\LastUpdate.cs" />
     <Compile Include="models\Person.cs" />
     <Compile Include="models\Site.cs" />

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WindowsUWP.models
+﻿namespace WindowsUWP.models
 {
-    class Site
+    public class Site
     {
         public int ID { get; set; }
         public string Url { get; set; }

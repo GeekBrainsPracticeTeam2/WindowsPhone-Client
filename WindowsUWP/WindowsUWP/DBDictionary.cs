@@ -17,7 +17,7 @@ namespace WindowsUWP
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=Rank.db");
+            optionsBuilder.UseSqlite("Filename=Rank1.db");
         }
     }
 
