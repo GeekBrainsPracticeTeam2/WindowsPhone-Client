@@ -96,7 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Json\JsonHelper.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Migrations\20170312085000_DbMigration.cs" />
     <Compile Include="Migrations\20170312085000_DbMigration.designer.cs">
       <DependentUpon>20170312085000_DbMigration.cs</DependentUpon>

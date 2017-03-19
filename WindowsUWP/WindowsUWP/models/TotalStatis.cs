@@ -34,6 +34,7 @@ namespace WindowsUWP.models
             }
             catch(NullReferenceException e)
             {
+                Console.WriteLine(e.Source);
                 PersonName = "Имя неизвестно";
             }
         }
