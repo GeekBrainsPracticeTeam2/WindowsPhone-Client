@@ -2,11 +2,9 @@
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WindowsUWP.models;
-using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace WindowsUWP.Helpers
 {
@@ -16,46 +14,99 @@ namespace WindowsUWP.Helpers
         WebRequest request;
         WebResponse response;
 
-        string sample = "{ \"data\":[{\"siteId\":0,\"statistics\":[{\"person\":0,\"count\":5},{\"person\":1,\"count\":7},{\"person\":2,\"count\":14},{\"person\":3,\"count\":8},{\"person\":4,\"count\":27}]},{\"siteId\":1,\"statistics\":[{\"person\":0,\"count\":3},{\"person\":1,\"count\":10},{\"person\":2,\"count\":7},{\"person\":3,\"count\":10},{\"person\":4,\"count\":21}]}]}";
-        string SAMPLE_JSON_TOTAL_STATISTICS = "{\"siteID\":0,\"statistics\":" +
-                                              "[{\"person\":0,\"count\":5},{\"person\":1,\"count\":7},{\"person\":2,\"count\":14}," +
-                                              "{\"person\":3,\"count\":8},{\"person\":4,\"count\":27}]}";
-        string SAMPLE_JSON_UPDATE_STATUS = "{\"tables\":[{\"ID\":0,\"lu_date\":" +
-                                           "\"2017-03-13 15:56:26\"},{\"ID\":1,\"lu_date\":\"2017-03-13 15:56:26\"}]}";
-        string SAMPLE_JSON_SITES_DIR_UPDATE = "{\"data\":[{\"ID\":0,\"url\":" +
-                                              "\"lenta.ru\"},{\"ID\":1,\"url\":\"vesti.ru\"},{\"ID\":2,\"url\":\"kp.ru\"}]}";
-        string SAMPLE_JSON_NAMES_DIR_UPDATE = "{\"data\":[{\"ID\":0,\"name\":" +
-                                              "\"Путин В.В.\"},{\"ID\":1,\"name\":\"Медведев Д.А.\"},{\"ID\":2,\"name\":\"Навальный ?.?.\"}]}";
+        const string serverUrl = "http://localhost:8080/WebAppRest/";
 
-        public void DeJson(string jstring)
+        /// <summary>
+        /// Специальная структура для упрощения получения даты
+        /// </summary>
+        private struct dateT
         {
+            public DateTime LastUpdate { get; set; }
+        }
 
+        public async Task<DateTime> GetSiteLustUpdateDateAsync(string tableName)
+        {
+            string token = "GetSitesUpdateDate";
+            string respone = await RequestAsync(token);
+
+            var dat = JsonConvert.DeserializeObject<dateT>(respone);
+
+            return dat.LastUpdate;
+        }
+
+        public async Task<DateTime> GetPersonLustUpdateDateAsync(string tableName)
+        {
+            string token = "GetPersonUpdateDate";
+            string respone = await RequestAsync(token);
+
+            var dat = JsonConvert.DeserializeObject<dateT>(respone);
+
+            return dat.LastUpdate;
+        }
+
+        public async Task<List<Site>> GetSitesAsync()
+        {
+            string token = "GetSites";
+            string respone = await RequestAsync(token);
+
+            dynamic stats = JsonConvert.DeserializeObject(respone);
+            List<Site> dat = JsonConvert.DeserializeObject<List<Site>>(stats.data.ToString());
+
+            return dat;
+        }
+
+        public async Task<List<Person>> GetPersonAsync(int id)
+        {
+            string token = "GetPersons";
+            string respone = await RequestAsync(token);
+
+            dynamic stats = JsonConvert.DeserializeObject(respone);
+            List<Person> dat = JsonConvert.DeserializeObject<List<Person>>(stats.data.ToString());
+
+            return dat;
+        }
+
+        public async Task<List<TotalStatis>> GetTotalstatisticsAsync()
+        {
+            string token = "GetSiteStatistic";
+            string respone = await RequestAsync(token);
+
+            dynamic stats = JsonConvert.DeserializeObject(respone);
+            var dat = JsonConvert.DeserializeObject<List<TotalStatis>>(stats.data.ToString());
+
+            return dat;
+        }
+
+        public async Task<List<DailyStatistics>> GetDailyStatisticsAsync(string beginDate, string endaDate)
+        {
+            string token = $"GetStatisticForPeriod?StartDate={beginDate}&EndDate={endaDate}";
+            string respone = await RequestAsync(token);
+
+            dynamic stats = JsonConvert.DeserializeObject(respone);
+            var dat = JsonConvert.DeserializeObject<List<DailyStatistics>>(stats.data.ToString());
+
+            return dat;
         }
 
 
-        public List<Person> GetAllPersons()
+        /// <summary>
+        /// Запрос к сайту с получением Json строки
+        /// </summary>
+        /// <param name="token">параметр запроса</param>
+        /// <returns></returns>
+        private static async Task<string> RequestAsync(string token)
         {
-            return new List<Person>();
-        }
-
-        public DateTime GetDateLustUpdate(string tableName)
-        {
-            return DateTime.Now;
-        }
-
-        public List<Site> GetAllSites()
-        {
-            return new List<Site>();
-        }
-
-        public Person GetPerson(int id)
-        {
-            return new Person();
-        }
-
-        public Site GetSite(int id)
-        {
-            return new Site();
+            string responseAnswer = "";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format($"{serverUrl}{token}"));
+            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    responseAnswer = reader.ReadToEnd();
+                }
+            }
+            return responseAnswer;
         }
     }
 }

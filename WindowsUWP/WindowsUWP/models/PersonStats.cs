@@ -8,18 +8,46 @@ namespace WindowsUWP.models
 {
     public class PersonStats
     {
-        public DateTime Date { get; set; }
-        public int Rank { get; set; }
+        public int person { get; set; }
+        public int count { get; set; }
+        public string PersonName
+        {
+            get
+            {
+                if (PersonName == null)
+                {
+                    return TakePersonName();
+                }
+                return PersonName;
+            }
+
+            protected set
+            {
+
+            }
+        }
 
         public PersonStats()
         {
 
         }
 
-        public PersonStats(DateTime date, int rankCount)
+        private string TakePersonName()
         {
-            Date = date;
-            Rank = rankCount;
+            try
+            {
+                using (var db = new DBDictionary())
+                {
+                    var person = db.Persons.Find(this.person);
+                    PersonName = person.name;
+                    return person.name;
+                }
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Source);
+                return $"Имя персоны с id {person} неизвестно";
+            }
         }
     }
 }

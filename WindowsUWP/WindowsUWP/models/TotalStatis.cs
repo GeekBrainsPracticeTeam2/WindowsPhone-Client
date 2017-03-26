@@ -9,35 +9,42 @@ namespace WindowsUWP.models
 {
     public class TotalStatis
     {
-        public string PersonName { get; set; }
-        public int Rank { get; set; }
+        public int siteId { get; set; }
+        public List<Person> statistics { get; set; }
 
-        protected int personId;
-
-        public TotalStatis(int personId, int rank)
+        public string siterUrl
         {
-            this.personId = personId;
-            this.Rank = rank;
+            get
+            {
+                return GetSiteUrl();
+            }
+            protected set
+            {
 
-            TakePersonName();
+            }
         }
 
-        private void TakePersonName()
+        public TotalStatis()
+        {
+
+        }
+
+        public string GetSiteUrl()
         {
             try
             {
                 using (var db = new DBDictionary())
                 {
-                    var person = db.Persons.Find(personId);
-                    PersonName = person.Name;
+                    var url = db.Sites.Find(siteId);
+                    return url.Url;
                 }
             }
-            catch(NullReferenceException e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e.Source);
-                PersonName = "Имя неизвестно";
+                return "Сайт неизвестен, возможно вы не обновили библиотеку?";
             }
-        }
 
+        }
     }
 }
