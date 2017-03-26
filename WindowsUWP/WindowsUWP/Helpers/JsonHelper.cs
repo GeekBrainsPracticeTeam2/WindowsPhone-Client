@@ -9,11 +9,8 @@ using System.IO;
 namespace WindowsUWP.Helpers
 {
     // TODO сделать работу с JSON
-    class JsonHelper
+    static class JsonHelper
     {
-        WebRequest request;
-        WebResponse response;
-
         const string serverUrl = "http://localhost:8080/WebAppRest/";
 
         /// <summary>
@@ -24,7 +21,12 @@ namespace WindowsUWP.Helpers
             public DateTime LastUpdate { get; set; }
         }
 
-        public async Task<DateTime> GetSiteLustUpdateDateAsync(string tableName)
+        /// <summary>
+        /// Получение даты последнего обновления справочника Сайты
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public static async Task<DateTime> GetSiteLustUpdateDateAsync(string tableName)
         {
             string token = "GetSitesUpdateDate";
             string respone = await RequestAsync(token);
@@ -34,7 +36,11 @@ namespace WindowsUWP.Helpers
             return dat.LastUpdate;
         }
 
-        public async Task<DateTime> GetPersonLustUpdateDateAsync(string tableName)
+        /// <summary>
+        /// Получение последней даты обновления справочников Персоны
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<DateTime> GetPersonLustUpdateDateAsync()
         {
             string token = "GetPersonUpdateDate";
             string respone = await RequestAsync(token);
@@ -44,7 +50,11 @@ namespace WindowsUWP.Helpers
             return dat.LastUpdate;
         }
 
-        public async Task<List<Site>> GetSitesAsync()
+        /// <summary>
+        /// Получение справочника Сайты
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<List<Site>> GetSitesAsync()
         {
             string token = "GetSites";
             string respone = await RequestAsync(token);
@@ -55,7 +65,11 @@ namespace WindowsUWP.Helpers
             return dat;
         }
 
-        public async Task<List<Person>> GetPersonAsync(int id)
+        /// <summary>
+        /// Получение Справочника Персоны
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<List<Person>> GetPersonAsync()
         {
             string token = "GetPersons";
             string respone = await RequestAsync(token);
@@ -66,7 +80,11 @@ namespace WindowsUWP.Helpers
             return dat;
         }
 
-        public async Task<List<TotalStatis>> GetTotalstatisticsAsync()
+        /// <summary>
+        /// Получение общей статистики по сайтам
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<List<TotalStatis>> GetTotalstatisticsAsync()
         {
             string token = "GetSiteStatistic";
             string respone = await RequestAsync(token);
@@ -77,7 +95,13 @@ namespace WindowsUWP.Helpers
             return dat;
         }
 
-        public async Task<List<DailyStatistics>> GetDailyStatisticsAsync(string beginDate, string endaDate)
+        /// <summary>
+        /// Получение статистики по сайтам за определённый период
+        /// </summary>
+        /// <param name="beginDate">Дата начала</param>
+        /// <param name="endaDate">Дата окончания</param>
+        /// <returns></returns>
+        public static async Task<List<DailyStatistics>> GetDailyStatisticsAsync(string beginDate, string endaDate)
         {
             string token = $"GetStatisticForPeriod?StartDate={beginDate}&EndDate={endaDate}";
             string respone = await RequestAsync(token);
