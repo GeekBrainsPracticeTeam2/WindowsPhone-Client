@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Popups;
+using WindowsUWP.Helpers;
 
 namespace WindowsUWP.models
 {
@@ -16,35 +13,17 @@ namespace WindowsUWP.models
         {
             get
             {
-                return GetSiteUrl();
+                if(siterUrl == null)
+                {
+                    siterUrl = DBhelper.GetSiteUrl(siteId);
+                    return siterUrl;
+                }
+                return siterUrl;
             }
             protected set
             {
-
+                
             }
-        }
-
-        public TotalStatis()
-        {
-
-        }
-
-        public string GetSiteUrl()
-        {
-            try
-            {
-                using (var db = new DBDictionary())
-                {
-                    var url = db.Sites.Find(siteId);
-                    return url.Url;
-                }
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e.Source);
-                return "Сайт неизвестен, возможно вы не обновили библиотеку?";
-            }
-
         }
     }
 }

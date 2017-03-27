@@ -24,7 +24,7 @@ namespace WindowsUWP
     public sealed partial class MainPage : Page
     {
 
-        public List<PersonStats> EveryDayStats { get; set; }
+        public List<DailyStatistics> EveryDayStats { get; set; }
         public List<TotalStatis> GeneralStatistis { get; set; }
         public List<Site> Sites { get; set; }
         public List<Person> Persons { get; set; }
@@ -32,20 +32,6 @@ namespace WindowsUWP
         public MainPage()
         {
             this.InitializeComponent();
-
-            EveryDayStats = new List<models.PersonStats>
-            {
-                new models.PersonStats(DateTime.Now, 2000),
-                new models.PersonStats(DateTime.Now, 3000),
-                new models.PersonStats(DateTime.Now, 2050),
-                new models.PersonStats(DateTime.Now, 200),
-            };
-
-            GeneralStatistis = new List<TotalStatis>
-            {
-                new TotalStatis(1,2000),
-                new TotalStatis(2, 4500),
-            };
 
             using(DBDictionary db = new DBDictionary())
             {
@@ -76,7 +62,155 @@ namespace WindowsUWP
 
         private void Page_Loading(FrameworkElement sender, object args)
         {
-            TotalStatis site = new TotalStatis(0,0);
+            EveryDayStats = new List<DailyStatistics>()
+            {
+                new DailyStatistics{
+                    siteId = 0,
+                    statistics = new List<stat>()
+                    {
+                        new stat
+                        {
+                            date = DateTime.Now,
+                            personsStats = new List<PersonStats>()
+                            {
+                                new PersonStats
+                                {
+                                    person = 1,
+                                    count = 1
+                                },
+                                new PersonStats
+                                {
+                                    person = 2,
+                                    count = 2
+                                },
+                                new PersonStats
+                                {
+                                    person = 3,
+                                    count = 3
+                                }
+                            }
+                        },
+                        new stat
+                        {
+                            date = DateTime.Now,
+                            personsStats = new List<PersonStats>()
+                            {
+                                new PersonStats
+                                {
+                                    person = 1,
+                                    count = 2
+                                },
+                                new PersonStats
+                                {
+                                    person = 2,
+                                    count = 3
+                                },
+                                new PersonStats
+                                {
+                                    person = 3,
+                                    count = 4
+                                }
+                            }
+                        },
+                        new stat
+                        {
+                            date = DateTime.Now,
+                            personsStats = new List<PersonStats>()
+                            {
+                                new PersonStats
+                                {
+                                    person = 1,
+                                    count = 3
+                                },
+                                new PersonStats
+                                {
+                                    person = 2,
+                                    count = 4
+                                },
+                                new PersonStats
+                                {
+                                    person = 3,
+                                    count = 5
+                                }
+                            }
+                        }
+                    },
+                },
+                new DailyStatistics{
+                    siteId = 1,
+                    statistics = new List<stat>()
+                    {
+                        new stat
+                        {
+                            date = DateTime.Now,
+                            personsStats = new List<PersonStats>()
+                            {
+                                new PersonStats
+                                {
+                                    person = 1,
+                                    count = 1
+                                },
+                                new PersonStats
+                                {
+                                    person = 2,
+                                    count = 2
+                                },
+                                new PersonStats
+                                {
+                                    person = 3,
+                                    count = 3
+                                }
+                            }
+                        },
+                        new stat
+                        {
+                            date = DateTime.Now,
+                            personsStats = new List<PersonStats>()
+                            {
+                                new PersonStats
+                                {
+                                    person = 1,
+                                    count = 2
+                                },
+                                new PersonStats
+                                {
+                                    person = 2,
+                                    count = 3
+                                },
+                                new PersonStats
+                                {
+                                    person = 3,
+                                    count = 4
+                                }
+                            }
+                        },
+                        new stat
+                        {
+                            date = DateTime.Now,
+                            personsStats = new List<PersonStats>()
+                            {
+                                new PersonStats()
+                                {
+                                    person = 1,
+                                    count = 3
+                                },
+                                new PersonStats()
+                                {
+                                    person = 2,
+                                    count = 4
+                                },
+                                new PersonStats()
+                                {
+                                    person = 3,
+                                    count = 5
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+
         }
 
         private void EverydayGridView_Loaded(object sender, RoutedEventArgs e)

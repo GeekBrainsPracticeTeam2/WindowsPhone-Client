@@ -45,7 +45,7 @@
                                 <ComboBox HorizontalAlignment="Left" Padding="5" VerticalAlignment="Top" Width="230" Loaded="ComboBox_Loaded">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate x:DataType="model:Person">
-                                            <TextBlock Text="{x:Bind Name}"/>
+                                            <TextBlock Text="{x:Bind name}"/>
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
@@ -56,15 +56,15 @@
                         <GridView Grid.Row="1" x:Name="GridView" Loaded="EverydayGridView_Loaded" Width="330">
                                 <GridView.ItemTemplate>
                                     <DataTemplate x:DataType="model:PersonStats">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="150" />
-                                            <ColumnDefinition Width="250" />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{x:Bind Date}" Padding="5"/>
-                                        <TextBlock Grid.Column="1" Text="{x:Bind Rank}" Padding="5"/>
-                                    </Grid>
-                                </DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="250" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{x:Bind PersonName}" Padding="5"/>
+                                            <TextBlock Grid.Column="1" Text="{x:Bind count}" Padding="5"/>
+                                        </Grid>
+                                    </DataTemplate>
                                 </GridView.ItemTemplate>
                         </GridView>
                     </Grid>
@@ -100,8 +100,8 @@
                                             <ColumnDefinition Width="150" />
                                             <ColumnDefinition Width="250" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{x:Bind PersonName}" Padding="5"/>
-                                        <TextBlock Grid.Column="1" Text="{x:Bind Rank}" Padding="5"/>
+                                        <TextBlock Grid.Column="0" Text="{x:Bind }" Padding="5"/>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind }" Padding="5"/>
                                     </Grid>
                                 </DataTemplate>
                             </GridView.ItemTemplate>

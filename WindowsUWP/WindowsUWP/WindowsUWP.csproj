@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DBhelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Migrations\20170312085000_DbMigration.cs" />
     <Compile Include="Migrations\20170312085000_DbMigration.designer.cs">
@@ -113,6 +114,8 @@
     <Compile Include="models\Person.cs" />
     <Compile Include="models\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewClass\EveryDayView.cs" />
+    <Compile Include="ViewClass\TotalView.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
