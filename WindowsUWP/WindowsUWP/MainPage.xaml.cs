@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using WindowsUWP.Helpers;
 using WindowsUWP.models;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
@@ -33,7 +34,9 @@ namespace WindowsUWP
         {
             this.InitializeComponent();
 
-            using(DBDictionary db = new DBDictionary())
+            List<TotalStatis> hello = JsonHelper.GetTotalstatisticsAsync().Result;
+
+            using (DBDictionary db = new DBDictionary())
             {
                 //Site site1 = new Site(1, "lenta.ru");
                 //Site site2 = new Site(2, "rio.ru");
@@ -56,6 +59,8 @@ namespace WindowsUWP
                 Persons = persons.ToList();
                 Sites = sites.ToList();         
             }
+
+
         }
 
 

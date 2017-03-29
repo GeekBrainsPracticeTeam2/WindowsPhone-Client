@@ -7,7 +7,7 @@ namespace WindowsUWP.models
     public class TotalStatis
     {
         public int siteId { get; set; }
-        public List<Person> statistics { get; set; }
+        public List<PersonStats> statistics { get; set; }
 
         public string siterUrl
         {

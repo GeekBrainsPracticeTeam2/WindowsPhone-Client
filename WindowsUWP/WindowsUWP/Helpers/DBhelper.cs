@@ -42,7 +42,7 @@ namespace WindowsUWP.Helpers
                 using (var db = new DBDictionary())
                 {
                     var url = db.Sites.Find(id);
-                    return url.Url;
+                    return url.name;
                 }
             }
             catch (NullReferenceException e)

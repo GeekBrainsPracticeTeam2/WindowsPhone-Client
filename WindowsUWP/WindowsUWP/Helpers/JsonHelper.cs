@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using WindowsUWP.models;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace WindowsUWP.Helpers
 {
@@ -105,6 +106,15 @@ namespace WindowsUWP.Helpers
         {
             string token = $"GetStatisticForPeriod?StartDate={beginDate}&EndDate={endaDate}";
             string respone = await RequestAsync(token);
+
+            string pat = "\"" + @"\d{4}-\d{2}-\d{2}" + "\"";
+
+            if (!Regex.IsMatch(respone, pat)) // приходящая дата не имеет кавычек, поэтому необходимо их добавить
+            {
+                string pattern = @"\d{4}-\d{2}-\d{2}";
+                string replacement = "\"$&\"";
+                respone = Regex.Replace(respone, pattern, replacement);
+            }
 
             dynamic stats = JsonConvert.DeserializeObject(respone);
             var dat = JsonConvert.DeserializeObject<List<DailyStatistics>>(stats.data.ToString());
